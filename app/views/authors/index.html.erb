@@ -2,7 +2,15 @@
 
 <ul>
     <% @authors.each do |author| %>
-        <li><%= author.title %></li>
+        <li>
+            <%= author.name %>
+            <%= author.email %>
+            <% if author.books.count > 0 %>
+                (<%= author.books.count %> books)
+            <% end %>
+            <%= link_to "Edit", edit_author_path(author) %>
+            <%= link_to "Delete", author_path(author), method: :delete, data: { confirm: "Are you sure you want to delete #{author.name}?" } %>
+        </li>
     <% end %>
 </ul>
 

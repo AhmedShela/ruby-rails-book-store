@@ -1,13 +1,23 @@
-<h1>List of Books</h1>
+<h1>Books</h1>
 
-<ul>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Release Date</th>
+      <th>Author</th>
+    </tr>
+  </thead>
+  <tbody>
     <% @books.each do |book| %>
-        <li>
-            <%= book.name %> by <%= book.author.name %> released at <%= book.release_date %>
-            <%= link_to "Edit", edit_book_path(book) %>
-            <%= button_to "Delete", book_path(book), method: :delete, data: { confirm: "Are you sure you want to delete #{book.name}?" } %>
-        </li>
+      <tr>
+        <td><%= book.name %></td>
+        <td><%= book.release_date %></td>
+        <td><%= book.author.name %></td>
+      </tr>
     <% end %>
-</ul>
+  </tbody>
+</table>
 
-<%= link_to "New Book", new_book_path %>
+<%= link_to 'Download Excel', books_path(format: :xlsx) %>
+<%= link_to 'Download CSV', books_path(format: :csv) %>

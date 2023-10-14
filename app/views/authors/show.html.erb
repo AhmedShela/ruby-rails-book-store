@@ -1,2 +1,6 @@
 <h1>Author Information</h1>
 <p><strong>Name:</strong> <%= @author.name %></p>
+<p><strong>email:</strong> <%= @author.email %></p>
+<%= button_to "Delete", author_path(@author), method: :delete, data: { confirm: "Are you sure?" } %>
+<%= link_to "Update", edit_author_path(@author) %>
+

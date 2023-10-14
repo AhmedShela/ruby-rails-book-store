@@ -1,0 +1,8 @@
+<% require 'csv' %>
+<% csv_data = CSV.generate do |csv|
+      csv << ["Name", "Release Date", "Author"]
+      @books.each do |book|
+        csv << [book.name, book.release_date, book.author.name]
+      end
+    end %>
+<%= csv_data %>

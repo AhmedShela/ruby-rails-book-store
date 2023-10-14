@@ -1,4 +1,5 @@
 class AuthorsController < ApplicationController
+    before_action :authenticate_author!
     def index
         @authors = Author.all
     end
@@ -24,6 +25,7 @@ class AuthorsController < ApplicationController
 
     def edit
         @author = Author.find(params[:id])
+        render :edit
     end
 
     def update
@@ -46,6 +48,6 @@ class AuthorsController < ApplicationController
     private
 
     def author_params
-        params.require(:author).permit(:name)
-    end
+        params.require(:author).permit(:name, :email, :password, :password_confirmation)
+      end
 end

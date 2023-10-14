@@ -1,6 +1,18 @@
 class BooksController < ApplicationController
+    before_action :authenticate_author!
     def index
         @books = Book.all
+        respond_to do |format|
+          format.html
+          format.xlsx do
+            response.headers['Content-Disposition'] = 'attachment; filename="books.xlsx"'
+            render xlsx: 'index', filename: 'books.xlsx'
+          end
+          format.csv do
+            response.headers['Content-Disposition'] = 'attachment; filename="books.csv"'
+            render csv: 'index', filename: 'books.csv'
+          end
+        end
     end
 
     def show
@@ -18,7 +30,9 @@ class BooksController < ApplicationController
         if @book.save
             redirect_to @book
         else
+            flash[:error] = "Book name must be unique."
             render :new
+
         end
     end
 

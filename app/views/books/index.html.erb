@@ -1,0 +1,13 @@
+<h1>List of Books</h1>
+
+<ul>
+    <% @books.each do |book| %>
+        <li>
+            <%= book.name %> by <%= book.author.name %> released at <%= book.release_date %>
+            <%= link_to "Edit", edit_book_path(book) %>
+            <%= button_to "Delete", book_path(book), method: :delete, data: { confirm: "Are you sure you want to delete #{book.name}?" } %>
+        </li>
+    <% end %>
+</ul>
+
+<%= link_to "New Book", new_book_path %>
